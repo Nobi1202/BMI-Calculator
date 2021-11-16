@@ -1,6 +1,5 @@
-import 'dart:ffi';
-
 import 'package:bmi_calculator/components/color.dart';
+import 'package:bmi_calculator/components/enum.dart';
 import 'package:bmi_calculator/components/height.dart';
 import 'package:bmi_calculator/widgets/container_widget.dart';
 import 'package:bmi_calculator/widgets/icon_content_widget.dart';
@@ -15,6 +14,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Gender? selectedGender;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,23 +27,41 @@ class _InputPageState extends State<InputPage> {
         children: [
           Expanded(
             child: Row(
-              children: const [
+              children: [
                 Expanded(
-                  child: ContainerWidget(
-                    cardChild: IconContentWidget(
-                      icon: FontAwesomeIcons.mars,
-                      label: "MALE",
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedGender = Gender.male;
+                      });
+                    },
+                    child: ContainerWidget(
+                      cardChild: const IconContentWidget(
+                        icon: FontAwesomeIcons.mars,
+                        label: "MALE",
+                      ),
+                      color: selectedGender == Gender.male
+                          ? AppColor.activeColor
+                          : AppColor.inactiveColor,
                     ),
-                    color: AppColor.wGrey300,
                   ),
                 ),
                 Expanded(
-                  child: ContainerWidget(
-                    cardChild: IconContentWidget(
-                      icon: FontAwesomeIcons.venus,
-                      label: "FEMALE",
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedGender = Gender.female;
+                      });
+                    },
+                    child: ContainerWidget(
+                      cardChild: const IconContentWidget(
+                        icon: FontAwesomeIcons.venus,
+                        label: "FEMALE",
+                      ),
+                      color: selectedGender == Gender.female
+                          ? AppColor.activeColor
+                          : AppColor.inactiveColor,
                     ),
-                    color: AppColor.wGrey300,
                   ),
                 ),
               ],
@@ -57,7 +76,7 @@ class _InputPageState extends State<InputPage> {
                       icon: FontAwesomeIcons.venus,
                       label: "FEMALE",
                     ),
-                    color: AppColor.wGrey300,
+                    color: AppColor.activeColor,
                   ),
                 ),
               ],
@@ -72,7 +91,7 @@ class _InputPageState extends State<InputPage> {
                       icon: FontAwesomeIcons.venus,
                       label: "FEMALE",
                     ),
-                    color: AppColor.wGrey300,
+                    color: AppColor.activeColor,
                   ),
                 ),
                 Expanded(
@@ -81,7 +100,7 @@ class _InputPageState extends State<InputPage> {
                       icon: FontAwesomeIcons.venus,
                       label: "FEMALE",
                     ),
-                    color: AppColor.wGrey300,
+                    color: AppColor.activeColor,
                   ),
                 ),
               ],
