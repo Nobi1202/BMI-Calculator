@@ -4,6 +4,7 @@ import 'package:bmi_calculator/components/height.dart';
 import 'package:bmi_calculator/components/text_style.dart';
 import 'package:bmi_calculator/widgets/reusable_card.dart';
 import 'package:bmi_calculator/widgets/icon_content_widget.dart';
+import 'package:bmi_calculator/widgets/round_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -17,6 +18,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
   int height = 180;
+  int weight = 60;
+  int age = 21;
 
   @override
   Widget build(BuildContext context) {
@@ -93,16 +96,27 @@ class _InputPageState extends State<InputPage> {
                             ),
                           ],
                         ),
-                        Slider(
-                          min: 120,
-                          max: 220,
-                          activeColor: AppColor.wPink500,
-                          value: height.toDouble(),
-                          onChanged: (newValue) {
-                            setState(() {
-                              height = newValue.round();
-                            });
-                          },
+                        SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                            activeTrackColor: Colors.white,
+                            thumbColor: AppColor.wPink300,
+                            overlayColor: AppColor.wPink400,
+                            thumbShape: const RoundSliderThumbShape(
+                                enabledThumbRadius: 15),
+                            overlayShape: const RoundSliderOverlayShape(
+                                overlayRadius: 30),
+                          ),
+                          child: Slider(
+                            min: 120,
+                            max: 220,
+                            inactiveColor: AppColor.wGrey500,
+                            value: height.toDouble(),
+                            onChanged: (newValue) {
+                              setState(() {
+                                height = newValue.round();
+                              });
+                            },
+                          ),
                         ),
                       ],
                     ),
@@ -118,9 +132,42 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableCard(
                     onPress: () {},
-                    cardChild: const IconContentWidget(
-                      icon: FontAwesomeIcons.venus,
-                      label: "FEMALE",
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "WEIGHT",
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          weight.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPress: () {
+                                setState(() {
+                                  weight--;
+                                });
+                              },
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPress: () {
+                                setState(() {
+                                  weight++;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                     color: AppColor.activeColor,
                   ),
@@ -128,9 +175,42 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableCard(
                     onPress: () {},
-                    cardChild: const IconContentWidget(
-                      icon: FontAwesomeIcons.venus,
-                      label: "FEMALE",
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "AGE",
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          age.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPress: () {
+                                setState(() {
+                                  age--;
+                                });
+                              },
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPress: () {
+                                setState(() {
+                                  age++;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                     color: AppColor.activeColor,
                   ),
