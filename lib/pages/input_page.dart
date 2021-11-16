@@ -223,6 +223,7 @@ class _InputPageState extends State<InputPage> {
             margin: const EdgeInsets.only(top: 10),
             height: Height.bottomContainerHeight,
             width: double.infinity,
+            child: const Text("Test"),
           ),
         ],
       ),
