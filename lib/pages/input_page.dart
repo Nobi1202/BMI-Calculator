@@ -1,7 +1,9 @@
+import 'package:bmi_calculator/components/calculator_brain.dart';
 import 'package:bmi_calculator/components/color.dart';
 import 'package:bmi_calculator/components/enum.dart';
-import 'package:bmi_calculator/components/height.dart';
 import 'package:bmi_calculator/components/text_style.dart';
+import 'package:bmi_calculator/pages/results_page.dart';
+import 'package:bmi_calculator/widgets/bottom_button.dart';
 import 'package:bmi_calculator/widgets/reusable_card.dart';
 import 'package:bmi_calculator/widgets/icon_content_widget.dart';
 import 'package:bmi_calculator/widgets/round_icon_button.dart';
@@ -20,6 +22,7 @@ class _InputPageState extends State<InputPage> {
   int height = 180;
   int weight = 60;
   int age = 21;
+  double bmi = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -218,12 +221,22 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: AppColor.wPink300,
-            margin: const EdgeInsets.only(top: 10),
-            height: Height.bottomContainerHeight,
-            width: double.infinity,
-            child: const Text("Test"),
+          BottomButton(
+            buttonTitle: "BMI CALCULATOR",
+            onTap: () {
+              CalculatorBrain calc =
+                  CalculatorBrain(bmi: bmi, weight: weight, height: height);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (ctx) => ResultsPage(
+                    bmiResult: calc.calculateBMI(),
+                    resultText: calc.getResult(),
+                    interpretation: calc.getInterpretation(),
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),
