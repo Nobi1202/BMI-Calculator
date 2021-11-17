@@ -1,8 +1,8 @@
 import 'package:bmi_calculator/components/color.dart';
 import 'package:bmi_calculator/components/enum.dart';
-import 'package:bmi_calculator/components/height.dart';
 import 'package:bmi_calculator/components/text_style.dart';
 import 'package:bmi_calculator/pages/results_page.dart';
+import 'package:bmi_calculator/widgets/bottom_button.dart';
 import 'package:bmi_calculator/widgets/reusable_card.dart';
 import 'package:bmi_calculator/widgets/icon_content_widget.dart';
 import 'package:bmi_calculator/widgets/round_icon_button.dart';
@@ -219,28 +219,16 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          GestureDetector(
+          BottomButton(
+            buttonTitle: "BMI CALCULATOR",
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const ResultsPage(),
+                  builder: (ctx) => const ResultsPage(),
                 ),
               );
             },
-            child: Container(
-              padding: const EdgeInsets.only(bottom: 20),
-              color: AppColor.wPink300,
-              margin: const EdgeInsets.only(top: 10),
-              height: Height.bottomContainerHeight,
-              width: double.infinity,
-              child: const Center(
-                child: Text(
-                  "CALCULATE",
-                  style: kLargeButtonTextStyle,
-                ),
-              ),
-            ),
           ),
         ],
       ),
